@@ -3,9 +3,9 @@
  */
 define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial'], function ($, googleMap, myMaps) {
     $(function(){
-        //myMaps.hk();
+        myMaps.hk.init();
         $.material.init();
-        myMaps.NearBy.initMap();
+        //myMaps.NearBy.initMap();
         $(".nearby-type").click(function(e){
             e.preventDefault();
             var type = $(this).data("types");
@@ -14,6 +14,14 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial'], function ($, googl
             myMaps.NearBy.initMap();
         });
 
+
+        $("#hk-map-polygon-draw").click(function () {
+            myMaps.hk.drawPolygon();
+        });
+
+        $("#hk-map-polygon-remove").click(function () {
+            myMaps.hk.removePolygon();
+        });
     });
 
 });

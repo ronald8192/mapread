@@ -4,16 +4,75 @@
 
 define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) {
     var myMaps = {
-        hk: function () {
-            new google.maps.Map($('#map')[0], {
-                center: {
-                    lat: 22.352734,
-                    lng: 114.132163
-                },
-                zoomControl: false,
-                streetViewControl: false,
-                zoom: 11
-            });
+        currentMap: undefined,
+        hk: {
+            clickedLatLng: [],
+            areaPolyline: undefined,
+            areaPolygon: undefined,
+            init: function () {
+                myMaps.currentMap = new google.maps.Map($('#map')[0], {
+                    center: {
+                        lat: 22.352734,
+                        lng: 114.132163
+                    },
+                    zoomControl: false,
+                    streetViewControl: false,
+                    zoom: 11
+                });
+
+                myMaps.currentMap.addListener('click', function(event){
+
+                    var latlng = {
+                        lat: event.latLng.lat(),
+                        lng: event.latLng.lng()
+                    };
+                    myMaps.hk.clickedLatLng.push(latlng);
+                    console.log(latlng);
+                    console.log(JSON.stringify(myMaps.hk.clickedLatLng));
+
+                    //new google.maps.Marker({
+                    //    position: event.latLng,
+                    //    map: myMaps.currentMap,
+                    //    icon: {
+                    //        url: 'http://dehayf5mhw1h7.cloudfront.net/wp-content/uploads/sites/404/2016/04/06125833/2000px-Location_dot_red.svg_.png',
+                    //        scaledSize: new google.maps.Size(10, 10)
+                    //    }
+                    //});
+
+                    if(myMaps.hk.areaPolyline != undefined){
+                        myMaps.hk.areaPolyline.setMap(null);
+                    }
+                    myMaps.hk.areaPolyline = new google.maps.Polyline({
+                        path: myMaps.hk.clickedLatLng,
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        //fillColor: '#FF0000',
+                        //fillOpacity: 0.35
+                    });
+                    myMaps.hk.areaPolyline.setMap(myMaps.currentMap);
+
+                    $("#latlngList").val(JSON.stringify(myMaps.hk.clickedLatLng));
+
+                });
+            },
+            drawPolygon: function(){
+                if(myMaps.hk.areaPolygon != undefined){
+                    myMaps.hk.areaPolygon.setMap(null);
+                }
+                myMaps.hk.areaPolygon = new google.maps.Polygon({
+                    path: myMaps.hk.clickedLatLng,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.6,
+                    strokeWeight: 2,
+                    fillColor: '#FF8800',
+                    fillOpacity: 0.35
+                });
+                myMaps.hk.areaPolygon.setMap(myMaps.currentMap);
+            },
+            removePolygon: function(){
+                myMaps.hk.areaPolygon.setMap(null);
+            }
         },
         NearBy : {
             map: undefined,
@@ -21,10 +80,10 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
             service:undefined,
             types:'cafe',
             initMap: function () {
-                var pyrmont = {lat: 22.3006592, lng: 114.1792019};
+                var centerLatLng = {lat: 22.3006592, lng: 114.1792019};
 
                 myMaps.NearBy.map = new google.maps.Map(document.getElementById('map'), {
-                    center: pyrmont,
+                    center: centerLatLng,
                     zoom: 16,
                     zoomControl: false,
                     streetViewControl: false
@@ -34,7 +93,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
 
                 myMaps.NearBy.service = new google.maps.places.PlacesService(myMaps.NearBy.map);
                 myMaps.NearBy.service.nearbySearch({
-                    location: pyrmont,
+                    location: centerLatLng,
                     radius: 600,
                     types: [myMaps.NearBy.types]
                 }, function (results, status) {
