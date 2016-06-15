@@ -10,7 +10,27 @@ requirejs.config({
         ],
         googleMap: [
             'https://maps.googleapis.com/maps/api/js?v=3&libraries=places'
+        ],
+        bootstrap: [
+            'vendor/bootstrap/dist/js/bootstrap.min'
+        ],
+        bootstrapMaterialRipples: [
+            'vendor/bootstrap-material-design/dist/js/ripples.min'
+        ],
+        bootstrapMaterial: [
+            'vendor/bootstrap-material-design/dist/js/material.min'
         ]
 
+    },
+    shim: {
+        'bootstrap': {
+            deps: ['jquery']
+        },
+        'bootstrapMaterialRipples': {
+            deps: ['jquery']
+        },
+        'bootstrapMaterial': {
+            deps: ['jquery','bootstrap','bootstrapMaterialRipples']
+        }
     }
 });
