@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Restaurants Distribution Around PolyU</title>
     <style type="text/css">
         html, body {
             height: 100%;
@@ -12,10 +12,114 @@
         #map {
             height: 100%;
         }
+        #optionPane{
+            position: fixed;
+            /*width: 300px;*/
+            height: 94vh;
+            width: 250px;
+            /*height: 380px;*/
+            right: 8px;
+            top: 12px;
+        }
+        .nearby-type{
+            width:100%
+        }
+        #option-hide{
+            position: relative;
+            bottom: 16px;
+            right: 16px;
+        }
+
+        #title-text{
+            font-family: "Ubuntu", sans-serif;
+            font-weight: bold;
+            font-size:2em;
+            border-width: 1px 0 0 0;
+            border-color: #000;
+            border-style: dotted;
+
+        }
+
+        .separator-bottom{
+            border-bottom-width: 1px;
+            border-bottom-color: #000;
+            border-bottom-style: dotted;
+        }
+
+        #title-text:hover{
+            cursor: pointer;
+        }
+        .placeImageBorder{
+            margin: 4px;
+            -webkit-box-shadow: 0 0 4px black;
+            -moz-box-shadow: 0 0 4px black;
+            box-shadow: 0 0 4px black;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+        }
+        .info-windows-row:hover{
+            background: rgba(0,0,0,.05);
+        }
+
+        #smallMap {
+            position: fixed;
+            /*width: 300px;*/
+            height: 150px;
+            width: 250px;
+            /*height: 380px;*/
+            left: 8px;
+            bottom: 10px;
+        }
+
+        .rating-icon{
+            height: 48px;
+            width: 48px;
+        }
+
+        #sMap {
+            border-style: solid;
+            height: 90%;
+            overflow: hidden;
+        }
+
+        #theScale{
+            width:100%;
+            background-color:#FFFFFF;
+        }
+        #symbolList{
+            width:100%
+        }
+        #scale-black{
+            background-color:#000000;
+        }
+        #scale-white{
+            background-color:#FFFFFF;
+        }
+        #sMap .gmnoprint span ,#sMap .gmnoprint a {
+            display:none;
+        }
+        #sMap .gmnoprint div {
+            background:none !important;
+        }
+        #sMap #GMapsID div div a div img{
+            display:none;
+        }
+
+        #text-route-content{
+            max-height: 30vh;
+            overflow-y: scroll;
+        }
+        #text-route-content ol{
+            padding-left: 20px;
+        }
     </style>
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" />
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap-material-design/dist/css/ripples.min.css" />
+    <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/animate.css/animate.min.css">
+    <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/lightbox2/dist/css/lightbox.min.css">
+
     <script data-main="asset/javascript/config" src="lib/require.js"></script>
     <script type="text/javascript">
         require(['config'], function(){
@@ -27,5 +131,48 @@
 </head>
 <body>
 <div id="map"></div>
+<div id="optionPane" class="well">
+    <div class="row">
+        <div class="col-sm-6">
+            <span id="option-show" class="glyphicon glyphicon-arrow-left hidden"></span>
+        </div>
+        <div class="col-sm-6 text-right">
+            <span id="option-hide" class="glyphicon glyphicon-arrow-right" style="position: relative; right: -2px;"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center" id="title-text">
+            Restaurants Distribution Around PolyU
+        </div>
+    </div>
+    <div class="row separator-bottom" id="types-option"></div>
+
+    <div class="row separator-bottom hidden" id="text-route">
+        <div class="col-sm-8"><h4>Text Route:</h4></div>
+        <div class="col-sm-3" ><button class="btn btn-xs btn-default btn-raised" id="text-route-hide">Clear</button></div>
+        <div class="col-sm-12" id="text-route-content"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center"><strong>Rating</strong></div>
+        <div class="col-xs-3 text-center" style="padding-left: 7px;padding-right: 7px"><strong class="text-center">-- </strong></div>
+        <div class="col-xs-3 text-center" style="padding-left: 7px;padding-right: 7px"><strong class="text-center">0 - 1.9</strong></div>
+        <div class="col-xs-3 text-center" style="padding-left: 7px;padding-right: 7px"><strong class="text-center">2 - 3.9</strong></div>
+        <div class="col-xs-3 text-center" style="padding-left: 7px;padding-right: 7px"><strong class="text-center">4 up</strong></div>
+
+        <div class="col-xs-3" style="padding-left: 7px"><img class="rating-icon" data-rate="0" src="asset/image/cafe0.png" /></div>
+        <div class="col-xs-3" style="padding-left: 7px"><img class="rating-icon" data-rate="1" src="asset/image/cafe1.png" /></div>
+        <div class="col-xs-3" style="padding-left: 7px"><img class="rating-icon" data-rate="2" src="asset/image/cafe2.png" /></div>
+        <div class="col-xs-3" style="padding-left: 7px"><img class="rating-icon" data-rate="3" src="asset/image/cafe3.png" /></div>
+
+    </div>
+
+    <div id="smallMap">
+        <div id="theScale" class="col-sm-8 text-center">
+            <Strong>1:200000</Strong>
+        </div>
+        <div id="sMap"></div>
+    </div>
+</div>
 </body>
 </html>
