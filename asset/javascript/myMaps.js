@@ -13,7 +13,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
 
                 var styles = [
                     {
-                        "elementType": "labels",
+                        "elementType": "labels.icon",
                         "stylers": [
                             { "weight": 0.1 },
                             { "visibility": "off" }
@@ -93,14 +93,13 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
             }
         },
         NearBy : {
-            map: undefined,
             infowindow: undefined,
             service:undefined,
             types:'cafe',
             initMap: function () {
                 var styles = [
                     {
-                        "elementType": "labels",
+                        "elementType": "labels.icon",
                         "stylers": [
                             { "weight": 0.1 },
                             { "visibility": "off" }
@@ -111,7 +110,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
 
                 var centerLatLng = {lat: 22.3006592, lng: 114.1792019};
 
-                myMaps.NearBy.map = new google.maps.Map(document.getElementById('map'), {
+                myMaps.currentMap = new google.maps.Map(document.getElementById('map'), {
                     center: centerLatLng,
                     zoom: 16,
                     zoomControl: false,
@@ -121,12 +120,12 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                     }
                 });
 
-                myMaps.NearBy.map.mapTypes.set('map_style', styledMap);
-                myMaps.NearBy.map.setMapTypeId('map_style');
+                myMaps.currentMap.mapTypes.set('map_style', styledMap);
+                myMaps.currentMap.setMapTypeId('map_style');
 
                 myMaps.NearBy.infowindow = new google.maps.InfoWindow();
 
-                myMaps.NearBy.service = new google.maps.places.PlacesService(myMaps.NearBy.map);
+                myMaps.NearBy.service = new google.maps.places.PlacesService(myMaps.currentMap);
                 myMaps.NearBy.service.nearbySearch({
                     location: centerLatLng,
                     radius: 600,
@@ -146,7 +145,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                 }, function(place, status) {
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
                         var options = {
-                            map: myMaps.NearBy.map,
+                            map: myMaps.currentMap,
                             position: place.geometry.location
                         };
                         if (place.icon == undefined || place.icon == null || place.icon == ""){
@@ -164,7 +163,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                                 '<strong>Address:</strong>' + place.formatted_address + '<br />' +
                                 '<strong>Rating:</strong>' + (place.rating==undefined ? "--" : place.rating) + '</div>'
                             );
-                            myMaps.NearBy.infowindow.open(myMaps.NearBy.map, this);
+                            myMaps.NearBy.infowindow.open(myMaps.currentMap, this);
                         });
                     }
                 });
@@ -182,7 +181,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                 //    NearBy.infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
                 //        'Place ID: ' + place.place_id + '<br>' +
                 //        place.formatted_address + '</div>');
-                //    NearBy.infowindow.open(NearBy.map, this);
+                //    NearBy.infowindow.open(currentMap, this);
                 //});
             }
         }
