@@ -1,9 +1,9 @@
 /**
  * Created by ronald8192 on 6/14/16.
  */
-
+var myMaps;
 define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) {
-    var myMaps = {
+    myMaps = {
         currentMap: undefined,
         hk: {
             clickedLatLng: [],
