@@ -27,6 +27,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                         lat: 22.352734,
                         lng: 114.132163
                     },
+                    scaleControl: true,
                     zoomControl: false,
                     streetViewControl: false,
                     zoom: 11,
@@ -113,6 +114,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                 myMaps.currentMap = new google.maps.Map(document.getElementById('map'), {
                     center: centerLatLng,
                     zoom: 16,
+                    scaleControl: true,
                     zoomControl: false,
                     streetViewControl: false,
                     mapTypeControlOptions: {
