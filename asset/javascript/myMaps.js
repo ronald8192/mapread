@@ -134,17 +134,20 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                     types: [myMaps.NearBy.types]
                 }, function (results, status) {
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
+                        console.log("Generate " + results.length + " markers...");
                         for (var i = 0; i < results.length; i++) {
-                            console.dir(results[i]);
-                            myMaps.NearBy.createMarker(results[i]);
+                            setTimeout("myMaps.NearBy.createMarker('" + results[i].place_id + "')",i*300);
+                            //myMaps.NearBy.createMarker(results[i]);
                         }
                     }
                 });
             },
             createMarker: function (place) {
+                //console.log('create marker ' + (place.place_id));
                 myMaps.NearBy.service.getDetails({
-                    placeId: place.place_id
+                    placeId: (typeof place == "object" ? place.place_id : place)
                 }, function(place, status) {
+                    console.log((place==null ? '?':place.place_id) + " => " + status);
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
                         var options = {
                             map: myMaps.currentMap,
