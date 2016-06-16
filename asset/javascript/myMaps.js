@@ -160,14 +160,14 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                             map: myMaps.currentMap,
                             position: place.geometry.location
                         };
-                        if (place.icon == undefined || place.icon == null || place.icon == ""){
-
-                        }else{
-                            options.icon = {
-                                url: place.icon,
-                                scaledSize: new google.maps.Size(32,32)
-                            };
-                        }
+                        //if (place.icon == undefined || place.icon == null || place.icon == ""){
+                        //
+                        //}else{
+                        //    options.icon = {
+                        //        url: place.icon,
+                        //        scaledSize: new google.maps.Size(32,32)
+                        //    };
+                        //}
                         var marker = new google.maps.Marker(options);
                         google.maps.event.addListener(marker, 'click', function() {
                             myMaps.NearBy.infowindow.setContent(
