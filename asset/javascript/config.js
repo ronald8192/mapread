@@ -9,7 +9,7 @@ requirejs.config({
             'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min'
         ],
         googleMap: [
-            'https://maps.googleapis.com/maps/api/js?v=3&libraries=places'
+            'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDy2zbjVhDMNQaqhXd8-MMI2VfcKXo5978&libraries=places'
         ],
         bootstrap: [
             'vendor/bootstrap/dist/js/bootstrap.min'
