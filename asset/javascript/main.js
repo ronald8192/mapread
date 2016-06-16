@@ -6,6 +6,20 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial'], function ($, googl
         myMaps.hk.init();
         $.material.init();
         //myMaps.NearBy.initMap();
+
+        var nearbyType = [
+            {name:'cafe',text:'Cafe'},
+            {name:'night_club',text:'Night Club'},
+            {name:'restaurant',text:'Restaurant'},
+            {name:'bar',text:'Bar'}
+        ];
+        for(var n in nearbyType){
+            $("#optionPane").append(
+                $("<button />").addClass("btn btn-default btn-raised nearby-type").data("types",nearbyType[n].name).text(nearbyType[n].text)
+            );
+            //nearbyType[n]
+        }
+
         $(".nearby-type").click(function(e){
             e.preventDefault();
             var type = $(this).data("types");
@@ -25,7 +39,7 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial'], function ($, googl
 
         myMaps.currentMap.addListener('zoom_changed', function(){
             console.log(myMaps.currentMap.getZoom());
-        })
+        });
     });
 
 });
