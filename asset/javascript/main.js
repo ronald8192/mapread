@@ -22,6 +22,10 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial'], function ($, googl
         $("#hk-map-polygon-remove").click(function () {
             myMaps.hk.removePolygon();
         });
+
+        myMaps.currentMap.addListener('zoom_changed', function(){
+            console.log(myMaps.currentMap.getZoom());
+        })
     });
 
 });
