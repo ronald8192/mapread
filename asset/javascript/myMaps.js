@@ -98,14 +98,31 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
             service:undefined,
             types:'cafe',
             initMap: function () {
+                var styles = [
+                    {
+                        "elementType": "labels",
+                        "stylers": [
+                            { "weight": 0.1 },
+                            { "visibility": "off" }
+                        ]
+                    }
+                ];
+                var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
+
                 var centerLatLng = {lat: 22.3006592, lng: 114.1792019};
 
                 myMaps.NearBy.map = new google.maps.Map(document.getElementById('map'), {
                     center: centerLatLng,
                     zoom: 16,
                     zoomControl: false,
-                    streetViewControl: false
+                    streetViewControl: false,
+                    mapTypeControlOptions: {
+                        mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+                    }
                 });
+
+                myMaps.NearBy.map.mapTypes.set('map_style', styledMap);
+                myMaps.NearBy.map.setMapTypeId('map_style');
 
                 myMaps.NearBy.infowindow = new google.maps.InfoWindow();
 
