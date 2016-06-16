@@ -128,7 +128,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                 myMaps.NearBy.infowindow = new google.maps.InfoWindow();
 
                 myMaps.NearBy.service = new google.maps.places.PlacesService(myMaps.currentMap);
-                myMaps.NearBy.service.nearbySearch({
+                myMaps.NearBy.service.radarSearch({
                     location: centerLatLng,
                     radius: 600,
                     types: [myMaps.NearBy.types]
