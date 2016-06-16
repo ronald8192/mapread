@@ -5,12 +5,18 @@ var myMaps;
 define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) {
     myMaps = {
         currentMap: undefined,
+        drawMarkerQueue: [],
+        emptyMarkerQueue: function(){
+            for(var i in myMaps.drawMarkerQueue){
+                clearTimeout(myMaps.drawMarkerQueue[i]);
+            }
+        },
         hk: {
             clickedLatLng: [],
             areaPolyline: undefined,
             areaPolygon: undefined,
             init: function () {
-
+                myMaps.emptyMarkerQueue();
                 var styles = [
                     {
                         "elementType": "labels.icon",
@@ -98,6 +104,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
             service:undefined,
             types:'cafe',
             initMap: function () {
+                myMaps.emptyMarkerQueue();
                 var styles = [
                     {
                         "elementType": "labels.icon",
@@ -136,7 +143,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
                         console.log("Generate " + results.length + " markers...");
                         for (var i = 0; i < results.length; i++) {
-                            setTimeout("myMaps.NearBy.createMarker('" + results[i].place_id + "')",i*300);
+                            myMaps.drawMarkerQueue.push(setTimeout("myMaps.NearBy.createMarker('" + results[i].place_id + "')",i*300));
                             //myMaps.NearBy.createMarker(results[i]);
                         }
                     }
