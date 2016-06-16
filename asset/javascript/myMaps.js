@@ -20,7 +20,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                         ]
                     }
                 ];
-                var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
+                var styledMap = new google.maps.StyledMapType(styles, {name: "Disable Symbols"});
 
                 myMaps.currentMap = new google.maps.Map($('#map')[0], {
                     center: {
@@ -107,7 +107,7 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                         ]
                     }
                 ];
-                var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
+                var styledMap = new google.maps.StyledMapType(styles, {name: "Disable Symbols"});
 
                 var centerLatLng = {lat: 22.3006592, lng: 114.1792019};
 
