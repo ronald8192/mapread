@@ -10,6 +10,18 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
             areaPolyline: undefined,
             areaPolygon: undefined,
             init: function () {
+
+                var styles = [
+                    {
+                        "elementType": "labels",
+                        "stylers": [
+                            { "weight": 0.1 },
+                            { "visibility": "off" }
+                        ]
+                    }
+                ];
+                var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
+
                 myMaps.currentMap = new google.maps.Map($('#map')[0], {
                     center: {
                         lat: 22.352734,
@@ -17,8 +29,14 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                     },
                     zoomControl: false,
                     streetViewControl: false,
-                    zoom: 11
+                    zoom: 11,
+                    mapTypeControlOptions: {
+                        mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+                    }
                 });
+
+                myMaps.currentMap.mapTypes.set('map_style', styledMap);
+                myMaps.currentMap.setMapTypeId('map_style');
 
                 myMaps.currentMap.addListener('click', function(event){
 
