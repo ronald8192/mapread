@@ -15,7 +15,7 @@
         #optionPane{
             position: fixed;
             /*width: 300px;*/
-            /*height: 400px;*/
+            height: 94vh;
             width: 250px;
             /*height: 380px;*/
             right: 8px;
@@ -24,10 +24,25 @@
         .nearby-type{
             width:100%
         }
+        #option-hide{
+            position: relative;
+            bottom: 16px;
+            right: 16px;
+        }
+
+        #title-text{
+            font-family: "Ubuntu", sans-serif;
+            font-weight: bold;
+            font-size:2em;
+            border-width: 1px 0 0 0;
+            border-color: #000;
+            border-style: dotted;
+        }
     </style>
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" />
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap-material-design/dist/css/ripples.min.css" />
+    <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/animate.css/animate.min.css">
     <script data-main="asset/javascript/config" src="lib/require.js"></script>
     <script type="text/javascript">
         require(['config'], function(){
@@ -40,6 +55,19 @@
 <body>
 <div id="map"></div>
 <div id="optionPane" class="well">
+    <div class="row">
+        <div class="col-sm-6">
+            <span id="option-show" class="glyphicon glyphicon-arrow-left hidden"></span>
+        </div>
+        <div class="col-sm-6 text-right">
+            <span id="option-hide" class="glyphicon glyphicon-arrow-right" style="position: relative; right: -2px;"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center" id="title-text">
+            MAP TITLE HERE
+        </div>
+    </div>
     <!--<textarea id="latlngList" class="form-control" rows="5" placeholder="latlng output"></textarea>-->
 
     <!--<button class="btn btn-default btn-raised" id="hk-map-polygon-draw">Draw polygon</button>-->

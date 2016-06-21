@@ -1,7 +1,7 @@
 /**
  * Created by ronald8192 on 6/14/16.
  */
-define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial'], function ($, googleMap, myMaps) {
+define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui'], function ($, googleMap, myMaps) {
     $(function(){
         myMaps.hk.init();
         $.material.init();
@@ -40,6 +40,24 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial'], function ($, googl
         myMaps.currentMap.addListener('zoom_changed', function(){
             console.log(myMaps.currentMap.getZoom());
         });
+
+        $("#option-show").click(function() {
+            $("#option-show").addClass('hidden');
+            $("#optionPane").animate({
+                right: '16px'
+            },500, 'easeOutQuart',function(){
+
+            });
+        });
+        $("#option-hide").click(function(){
+            $("#optionPane").animate({
+                right: '-210px'
+            },500, 'easeOutQuart',function(){
+                $("#option-show").removeClass('hidden');
+            });
+        });
+
+
     });
 
 });

@@ -8,6 +8,10 @@ requirejs.config({
         jquery:[
             'https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min'
         ],
+        jqueryui:[
+            'vendor/jquery-ui/jquery-ui.min',
+            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min'
+        ],
         googleMap: [
             'https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyDy2zbjVhDMNQaqhXd8-MMI2VfcKXo5978&libraries=places'
         ],
@@ -23,6 +27,9 @@ requirejs.config({
 
     },
     shim: {
+        'jqueryui':{
+            deps: ['jquery']
+        },
         'bootstrap': {
             deps: ['jquery']
         },
