@@ -26,6 +26,10 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui'], functio
             $("#nearby-showing-type").text($(this).text());
             myMaps.NearBy.types = type;
             myMaps.NearBy.initMap();
+
+            myMaps.currentMap.addListener('zoom_changed', function(){
+                console.log(myMaps.currentMap.getZoom());
+            });
         });
 
 
@@ -35,10 +39,6 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui'], functio
 
         $("#hk-map-polygon-remove").click(function () {
             myMaps.hk.removePolygon();
-        });
-
-        myMaps.currentMap.addListener('zoom_changed', function(){
-            console.log(myMaps.currentMap.getZoom());
         });
 
         $("#option-show").click(function() {
