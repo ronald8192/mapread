@@ -58,7 +58,8 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox
         });
 
         $("#title-text").click(function(){
-            myMaps.currentMap.setCenter({lat:22.304265, lng:114.179726}).setZoom(11);
+            myMaps.currentMap.setCenter({lat:22.304265, lng:114.179726});
+            myMaps.currentMap.setZoom(16)
         });
 
     });
