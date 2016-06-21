@@ -1,7 +1,7 @@
 /**
  * Created by ronald8192 on 6/14/16.
  */
-define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui'], function ($, googleMap, myMaps) {
+define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox2'], function ($, googleMap, myMaps) {
     $(function(){
         myMaps.hk.init();
         $.material.init();

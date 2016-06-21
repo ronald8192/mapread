@@ -23,6 +23,9 @@ requirejs.config({
         ],
         bootstrapMaterial: [
             'vendor/bootstrap-material-design/dist/js/material.min'
+        ],
+        lightbox2: [
+            'vendor/lightbox2/dist/js/lightbox.min'
         ]
 
     },
@@ -38,6 +41,9 @@ requirejs.config({
         },
         'bootstrapMaterial': {
             deps: ['jquery','bootstrap','bootstrapMaterialRipples']
+        },
+        'lightbox2':{
+            deps: ['jquery']
         }
     }
 });

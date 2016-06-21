@@ -2,7 +2,7 @@
  * Created by ronald8192 on 6/14/16.
  */
 var myMaps;
-define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) {
+define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
     myMaps = {
         currentMap: undefined,
         drawMarkerQueue: [],
