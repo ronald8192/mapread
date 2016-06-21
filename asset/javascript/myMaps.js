@@ -264,12 +264,23 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                                 );
                                 if(place.hasOwnProperty('website')){
                                     content.append(
-                                        $("<div />").append($("<strong />").text("Website: ")).append(
-                                            $("<a />").attr({
-                                                'href':place.website,
-                                                'target': '_blank'
-                                            }).html(
-                                                $("<span />").addClass("glyphicon glyphicon-new-window")
+                                        $("<div />").addClass('row info-windows-row').append(
+                                            $("<div />").addClass('col-xs-3').append($("<strong />").text("Website: "))
+                                        ).append(
+                                            $("<div />").addClass('col-xs-9').append(
+                                                $("<a />").attr({
+                                                    'href':place.website,
+                                                    'target': '_blank'
+                                                }).html(
+                                                    $("<span />")
+                                                        .addClass("glyphicon glyphicon-new-window")
+                                                        .html(
+                                                            $("<span />").css({
+                                                                'overflow':'hidden',
+                                                                'font-family':'Roboto,Arial,sans-serif'
+                                                            }).text( ' ' + place.website)
+                                                        )
+                                                )
                                             )
                                         )
                                     );
