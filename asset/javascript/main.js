@@ -3,9 +3,9 @@
  */
 define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox2'], function ($, googleMap, myMaps) {
     $(function(){
-        myMaps.hk.init();
+        //myMaps.hk.init();
         $.material.init();
-        //myMaps.NearBy.initMap();
+        myMaps.NearBy.initMap();
 
         var nearbyType = [
             {name:'cafe',text:'Cafe'},

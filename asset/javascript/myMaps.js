@@ -203,6 +203,7 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                     placeId: (typeof place == "object" ? place.place_id : place)
                 }, function(place, status) {
                     console.log((place==null ? '?':place.place_id) + " => " + status);
+                    console.dir(place);
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
                         var options = {
                             map: myMaps.currentMap,
@@ -218,11 +219,92 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                         //}
                         var marker = new google.maps.Marker(options);
                         google.maps.event.addListener(marker, 'click', function() {
-                            myMaps.NearBy.infowindow.setContent(
-                                '<div><strong>' + place.name + '</strong><br>' +
-                                '<strong>Address:</strong>' + place.formatted_address + '<br />' +
-                                '<strong>Rating:</strong>' + (place.rating==undefined ? "--" : place.rating) + '</div>'
-                            );
+                            myMaps.NearBy.infowindow.setContent(function(){
+                                var content = $("<div />").css({'overflow':'hidden'}).append(
+                                    $("<div />").addClass("text-center").css({
+                                        'border-width':'0 0 1px 0',
+                                        'border-style':'dotted',
+                                        'border-color':'#000',
+                                        'font-size': '16pt'
+                                    }).append($("<a />").attr({
+                                        'href':place.url,
+                                        'target':'_blank'
+                                    }).text(place.name)).append(
+                                        $("<span />").css({
+                                            'border-color':'#000',
+                                            'font-size': '10pt',
+                                            'position':'relative',
+                                            'top':'-2px'
+                                        }).text(function(){
+                                                if(place.hasOwnProperty('opening_hours')){
+                                                    return ' - ' + ((place.opening_hours.open_now)? "Now Open" : "Now Close")
+                                                }
+                                            }()
+                                        )
+                                    )
+                                ).append(
+                                    $("<div />").append($("<strong />").text("Address: ")).append($("<span />").text(place.formatted_address))
+                                ).append(
+                                    $("<div />").append($("<strong />").text("Rating: ")).append($("<span />").text((place.rating==undefined ? " -- " : place.rating)))
+                                ).append(
+                                    $("<div />").append($("<strong />").text("Phone Number: ")).append($("<span />").text((place.formatted_phone_number==undefined ? " -- " : place.formatted_phone_number)))
+                                );
+                                if(place.hasOwnProperty('website')){
+                                    content.append(
+                                        $("<div />").append($("<strong />").text("Website: ")).append(
+                                            $("<a />").attr({
+                                                'href':place.website,
+                                                'target': '_blank'
+                                            }).html(
+                                                $("<span />").addClass("glyphicon glyphicon-new-window")
+                                            )
+                                        )
+                                    );
+                                }
+                                if(place.hasOwnProperty('opening_hours')){
+                                    content.append(
+                                        $("<div />").append($("<strong />").text("Open Hours: "))
+                                    );
+                                    for(var i=0;i<place.opening_hours.weekday_text.length;i++){
+                                        var text = place.opening_hours.weekday_text[i];
+                                        var text_week = text.substr(0,text.indexOf(':')+1);
+                                        var text_hour = text.substr(text.indexOf(':')+1,text.length-1);
+                                        content.append(
+                                            $("<div />").addClass("row").append(
+                                                $("<div />").addClass("col-xs-4").css({'font-weight':'bold'}).text(' - ' + text_week)
+                                            ).append(
+                                                $("<div />").addClass("col-xs-6").text(text_hour)
+                                            )
+                                        )
+                                    }
+                                }
+
+                                if(place.hasOwnProperty('photos')){
+                                    //<a href="images/image-2.jpg" data-lightbox="roadtrip">Image #2</a>
+                                    var div = $("<div />").append("<br />").append($("<div />").append($("<strong />").text("Photos: ")));
+                                    for(var i in place.photos){
+                                        div.append(
+                                            $("<a />").attr({
+                                                'href': place.photos[i].getUrl({'maxWidth': 1000, 'maxHeight': 1000}),
+                                                'data-lightbox': 'photoOf' + place.name,
+                                                'data-title': 'Photo of ' + place.name
+                                            }).html(
+                                                $("<img />").addClass("placeImageBorder").attr({
+                                                    "src": place.photos[i].getUrl({'maxWidth': 300, 'maxHeight': 300})
+                                                })
+                                            )
+                                        );
+                                    }
+                                    content.append(div);
+                                }
+
+                                if(place.hasOwnProperty('reviews')){
+                                    console.log('Has reviews');
+                                    console.dir(place.reviews)
+                                }
+
+                                return content[0].outerHTML
+                            }());
                             myMaps.NearBy.infowindow.open(myMaps.currentMap, this);
                         });
                     }
