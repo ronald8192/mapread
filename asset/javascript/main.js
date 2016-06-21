@@ -4,7 +4,6 @@
 define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox2'], function ($, googleMap, myMaps) {
     $(function(){
         //myMaps.hk.init();
-        $.material.init();
         myMaps.NearBy.initMap();
 
         var nearbyType = [
@@ -13,11 +12,28 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox
             {name:'restaurant',text:'Restaurant'},
             {name:'bar',text:'Bar'}
         ];
+
         for(var n in nearbyType){
             $("#optionPane").append(
-                $("<button />").addClass("btn btn-default btn-raised nearby-type").data("types",nearbyType[n].name).text(nearbyType[n].text)
+                $("<div />").addClass('row').append(
+                    $("<div />").addClass('col-xs-2').append(
+                        $("<img />").attr({
+                            'src':'asset/image/food-icon-dinner.png'
+                        }).css({
+                            'height':'36px',
+                            'width':'36px',
+                            'margin': '10px 1px'
+                        })
+                    )
+                ).append(
+                    $("<div />").addClass('col-xs-10').append(
+                        $("<span />")
+                            .addClass("btn btn-default btn-raised nearby-type")
+                            .data("types",nearbyType[n].name)
+                            .text(nearbyType[n].text)
+                    )
+                )
             );
-            //nearbyType[n]
         }
 
         $(".nearby-type").click(function(e){
@@ -62,6 +78,8 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox
             myMaps.currentMap.setZoom(16)
         });
 
+
+        $.material.init();
     });
 
 });
