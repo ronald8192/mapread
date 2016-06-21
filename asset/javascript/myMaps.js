@@ -10,6 +10,7 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
             for(var i in myMaps.drawMarkerQueue){
                 clearTimeout(myMaps.drawMarkerQueue[i]);
             }
+            myMaps.drawMarkerQueue = [];
         },
         hk: {
             clickedLatLng: [],
