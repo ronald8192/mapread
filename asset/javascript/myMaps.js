@@ -244,11 +244,23 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                                         )
                                     )
                                 ).append(
-                                    $("<div />").append($("<strong />").text("Address: ")).append($("<span />").text(place.formatted_address))
+                                    $("<div />").addClass('row info-windows-row').append(
+                                        $("<div />").addClass('col-xs-3').append($("<strong />").text("Address: "))
+                                    ).append(
+                                        $("<div />").addClass('col-xs-9').append($("<span />").text(place.formatted_address))
+                                    )
                                 ).append(
-                                    $("<div />").append($("<strong />").text("Rating: ")).append($("<span />").text((place.rating==undefined ? " -- " : place.rating)))
+                                    $("<div />").addClass('row info-windows-row').append(
+                                        $("<div />").addClass('col-xs-3').append($("<strong />").text("Rating: "))
+                                    ).append(
+                                        $("<div />").addClass('col-xs-9').append($("<span />").text((place.rating==undefined ? " -- " : place.rating)))
+                                    )
                                 ).append(
-                                    $("<div />").append($("<strong />").text("Phone Number: ")).append($("<span />").text((place.formatted_phone_number==undefined ? " -- " : place.formatted_phone_number)))
+                                    $("<div />").addClass('row info-windows-row').append(
+                                        $("<div />").addClass('col-xs-3').append($("<strong />").text("Phone Number: "))
+                                    ).append(
+                                        $("<div />").addClass('col-xs-9').append($("<span />").text((place.formatted_phone_number==undefined ? " -- " : place.formatted_phone_number)))
+                                    )
                                 );
                                 if(place.hasOwnProperty('website')){
                                     content.append(
@@ -264,17 +276,17 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                                 }
                                 if(place.hasOwnProperty('opening_hours')){
                                     content.append(
-                                        $("<div />").append($("<strong />").text("Open Hours: "))
+                                        $("<div />").addClass('info-windows-row').append($("<strong />").text("Open Hours: "))
                                     );
                                     for(var i=0;i<place.opening_hours.weekday_text.length;i++){
                                         var text = place.opening_hours.weekday_text[i];
                                         var text_week = text.substr(0,text.indexOf(':')+1);
                                         var text_hour = text.substr(text.indexOf(':')+1,text.length-1);
                                         content.append(
-                                            $("<div />").addClass("row").append(
-                                                $("<div />").addClass("col-xs-4").css({'font-weight':'bold'}).text(' - ' + text_week)
+                                            $("<div />").addClass("row info-windows-row").append(
+                                                $("<div />").addClass("col-xs-3").css({'font-weight':'bold'}).text(' - ' + text_week)
                                             ).append(
-                                                $("<div />").addClass("col-xs-6").text(text_hour)
+                                                $("<div />").addClass("col-xs-9").text(text_hour)
                                             )
                                         )
                                     }
@@ -282,7 +294,7 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
 
                                 if(place.hasOwnProperty('photos')){
                                     //<a href="images/image-2.jpg" data-lightbox="roadtrip">Image #2</a>
-                                    var div = $("<div />").append("<br />").append($("<div />").append($("<strong />").text("Photos: ")));
+                                    var div = $("<div />").append("<br />").append($("<div />").addClass('info-windows-row').append($("<strong />").text("Photos: ")));
                                     for(var i in place.photos){
                                         div.append(
                                             $("<a />").attr({
