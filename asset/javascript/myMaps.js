@@ -164,7 +164,7 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                     ;
                 var styledMap = new google.maps.StyledMapType(styles, {name: "Disable Symbols"});
 
-                var centerLatLng = {lat: 22.3006592, lng: 114.1792019};
+                var centerLatLng =  {lat: 22.304265, lng: 114.179726};
 
                 myMaps.currentMap = new google.maps.Map(document.getElementById('map'), {
                     center: centerLatLng,
