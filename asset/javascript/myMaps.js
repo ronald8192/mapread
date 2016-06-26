@@ -221,16 +221,16 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                     var imageIndex;
                     if(place.hasOwnProperty('rating')){
                         console.log(place.rating);
-                        place.rating = parseFloat(place.rating) / 5 * 3;
-                        place.rating = Math.round(place.rating * 10) / 10;
-                        if(place.rating < 1){
-                            // [0,1)
+                        //place.rating = parseFloat(place.rating) / 5 * 3;
+                        //place.rating = Math.round(place.rating * 10) / 10;
+                        if(place.rating < 2){
+                            // [0,2)
                             imageIndex = 1
-                        }else if(place.rating > 2){
-                            // (2,3]
+                        }else if(place.rating >= 4){
+                            // [4,5]
                             imageIndex = 3
                         }else{
-                            // [1,2)
+                            // [2,4)
                             imageIndex = 2
                         }
 
@@ -297,7 +297,7 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                                     $("<div />").addClass('row info-windows-row').append(
                                         $("<div />").addClass('col-xs-3').append($("<strong />").text("Rating: "))
                                     ).append(
-                                        $("<div />").addClass('col-xs-9').append($("<span />").text((place.rating==undefined ? " -- " : place.rating + " / 3")))
+                                        $("<div />").addClass('col-xs-9').append($("<span />").text((place.rating==undefined ? " -- " : place.rating)))
                                     )
                                 ).append(
                                     $("<div />").addClass('row info-windows-row').append(
