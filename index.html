@@ -39,6 +39,13 @@
             border-style: dotted;
 
         }
+
+        .separator-bottom{
+            border-bottom-width: 1px;
+            border-bottom-color: #000;
+            border-bottom-style: dotted;
+        }
+
         #title-text:hover{
             cursor: pointer;
         }
@@ -69,6 +76,11 @@
             border-style: solid;
             height: 90%;
             overflow: hidden;
+        }
+
+        .rating-icon{
+            height: 48px;
+            width: 48px;
         }
     </style>
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap/dist/css/bootstrap.min.css" />
@@ -102,12 +114,26 @@
             Restaurants Distribution Around PolyU
         </div>
     </div>
-    <div class="row" id="types-option"></div>
+    <div class="row separator-bottom" id="types-option"></div>
 
-    <div class="row hidden" id="text-route">
+    <div class="row separator-bottom hidden" id="text-route">
         <div class="col-sm-8"><h3>Text Route:</h3></div>
         <div class="col-sm-3" style="padding-top: 10px"><button class="btn btn-xs btn-default btn-raised" id="text-route-hide">Clear</button></div>
         <div class="col-sm-12" id="text-route-content"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 text-center"><strong>Rating</strong></div>
+        <div class="col-xs-3 text-center"><strong class="text-center">-- </strong></div>
+        <div class="col-xs-3 text-center"><strong class="text-center">0-1</strong></div>
+        <div class="col-xs-3 text-center"><strong class="text-center">1-2</strong></div>
+        <div class="col-xs-3 text-center"><strong class="text-center">2-3</strong></div>
+
+        <div class="col-xs-3" style="padding-left: 7px"><img class="rating-icon" data-rate="0" src="asset/image/cafe0.png" /></div>
+        <div class="col-xs-3" style="padding-left: 7px"><img class="rating-icon" data-rate="1" src="asset/image/cafe1.png" /></div>
+        <div class="col-xs-3" style="padding-left: 7px"><img class="rating-icon" data-rate="2" src="asset/image/cafe2.png" /></div>
+        <div class="col-xs-3" style="padding-left: 7px"><img class="rating-icon" data-rate="3" src="asset/image/cafe3.png" /></div>
+
     </div>
 
     <div id="smallMap">

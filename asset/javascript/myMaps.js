@@ -215,12 +215,20 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                 }, function(place, status) {
                     console.log((place==null ? '?':place.place_id) + " => " + status);
                     console.dir(place);
+
+                    if(place == null) return;
+
+                    if(place.hasOwnProperty('rating')){
+                        place.rating = parseFloat(place.rating) / 5 * 3;
+                        place.rating = Math.round(place.rating * 10) / 10;
+                    }
+
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
                         var options = {
                             map: myMaps.currentMap,
                             position: place.geometry.location,
                             icon:{
-                                url: 'asset/image/' + myMaps.NearBy.types + '.png',
+                                url: 'asset/image/' + myMaps.NearBy.types + (place.hasOwnProperty('rating') ? parseInt(place.rating) : 0) +  '.png',
                                 scaledSize: new google.maps.Size(32,32)
                             }
                         };
@@ -276,7 +284,7 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                                     $("<div />").addClass('row info-windows-row').append(
                                         $("<div />").addClass('col-xs-3').append($("<strong />").text("Rating: "))
                                     ).append(
-                                        $("<div />").addClass('col-xs-9').append($("<span />").text((place.rating==undefined ? " -- " : place.rating)))
+                                        $("<div />").addClass('col-xs-9').append($("<span />").text((place.rating==undefined ? " -- " : place.rating + " / 3")))
                                     )
                                 ).append(
                                     $("<div />").addClass('row info-windows-row').append(

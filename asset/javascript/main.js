@@ -19,17 +19,22 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox
                 $("<div />").addClass('row').append(
                     $("<div />").addClass('col-xs-2').append(
                         $("<img />").attr({
-                            'src':'asset/image/' + nearbyType[n].name + '.png'
+                            'src':'asset/image/' + nearbyType[n].name + '0.png'
                         }).css({
                             'height':'36px',
                             'width':'36px',
-                            'margin': '10px 1px'
+                            'margin-top':'0px',
+                            'margin-bottom':'4px',
                         })
                     )
                 ).append(
                     $("<div />").addClass('col-xs-10').append(
                         $("<span />")
-                            .addClass("btn btn-default btn-raised nearby-type")
+                            .css({
+                                'margin-top':'4px',
+                                'margin-bottom':'4px',
+                            })
+                            .addClass("btn btn-default btn-raised btn-sm nearby-type")
                             .data("types",nearbyType[n].name)
                             .text(nearbyType[n].text)
                     )
@@ -43,6 +48,16 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox
             $("#nearby-showing-type").text($(this).text());
             myMaps.NearBy.types = type;
             myMaps.NearBy.initMap();
+
+            $.each($(".rating-icon"), function (k, v) {
+                setTimeout(function(){
+                    $(v).animate({opacity: 0}, 'fast', function() {
+                        $(v).attr({
+                            src:'asset/image/' + myMaps.NearBy.types + $(v).data('rate') + ".png"
+                        }).animate({opacity: 1});
+                    });
+                },k*50);
+            });
 
             myMaps.currentMap.addListener('zoom_changed', function(){
                 console.log("Zoom Level: " + myMaps.currentMap.getZoom() + ", Meters per pixel: " + (156543.03392 * Math.cos(myMaps.currentMap.getCenter().lat() * Math.PI / 180) / Math.pow(2, myMaps.currentMap.getZoom())));
