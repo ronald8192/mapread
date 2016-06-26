@@ -253,6 +253,8 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                                         }).text(function(){
                                                 if(place.hasOwnProperty('opening_hours')){
                                                     return ' - ' + ((place.opening_hours.open_now)? "Now Open" : "Now Close")
+                                                }else{
+                                                    return '';
                                                 }
                                             }()
                                         )
@@ -314,11 +316,24 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                                         var text = place.opening_hours.weekday_text[i];
                                         var text_week = text.substr(0,text.indexOf(':')+1);
                                         var text_hour = text.substr(text.indexOf(':')+1,text.length-1);
+
                                         content.append(
                                             $("<div />").addClass("row info-windows-row").append(
                                                 $("<div />").addClass("col-xs-3").css({'font-weight':'bold'}).text(' - ' + text_week)
                                             ).append(
-                                                $("<div />").addClass("col-xs-9").text(text_hour)
+                                                $("<div />").addClass("col-xs-9").css({
+                                                    'font-weight': function(){
+                                                        var today = (new Date()).getDay();
+                                                        console.log(today + " - " + i);
+                                                        if((i+1) == today){
+                                                            return 'bold';
+                                                        }else if(today == 0 && i == 6){
+                                                            return 'bold';
+                                                        }else{
+                                                            return 'auto';
+                                                        }
+                                                    }()
+                                                }).text(text_hour)
                                             )
                                         )
                                     }
