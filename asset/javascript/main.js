@@ -5,7 +5,7 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui'], functio
     $(function(){
         myMaps.hk.init();
         $.material.init();
-        //myMaps.NearBy.initMap();
+
 
         var nearbyType = [
             {name:'cafe',text:'Cafe'},
@@ -14,7 +14,7 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui'], functio
             {name:'bar',text:'Bar'}
         ];
         for(var n in nearbyType){
-            $("#optionPane").append(
+            $("#optionButton").append(
                 $("<button />").addClass("btn btn-default btn-raised nearby-type").data("types",nearbyType[n].name).text(nearbyType[n].text)
             );
             //nearbyType[n]
@@ -26,6 +26,10 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui'], functio
             $("#nearby-showing-type").text($(this).text());
             myMaps.NearBy.types = type;
             myMaps.NearBy.initMap();
+
+            myMaps.currentMap.addListener('zoom_changed', function(){
+                console.log(myMaps.currentMap.getZoom());
+            });
         });
 
 
@@ -35,10 +39,6 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui'], functio
 
         $("#hk-map-polygon-remove").click(function () {
             myMaps.hk.removePolygon();
-        });
-
-        myMaps.currentMap.addListener('zoom_changed', function(){
-            console.log(myMaps.currentMap.getZoom());
         });
 
         $("#option-show").click(function() {
@@ -61,3 +61,4 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui'], functio
     });
 
 });
+

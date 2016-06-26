@@ -155,28 +155,65 @@ define(['jquery', 'googleMap', 'weatherData'], function ($, googleMap, weather) 
                     placeId: (typeof place == "object" ? place.place_id : place)
                 }, function(place, status) {
                     console.log((place==null ? '?':place.place_id) + " => " + status);
+                    console.dir(place);
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
-                        var options = {
-                            map: myMaps.currentMap,
-                            position: place.geometry.location
-                        };
-                        //if (place.icon == undefined || place.icon == null || place.icon == ""){
-                        //
-                        //}else{
-                        //    options.icon = {
-                        //        url: place.icon,
-                        //        scaledSize: new google.maps.Size(32,32)
-                        //    };
-                        //}
-                        var marker = new google.maps.Marker(options);
-                        google.maps.event.addListener(marker, 'click', function() {
-                            myMaps.NearBy.infowindow.setContent(
-                                '<div><strong>' + place.name + '</strong><br>' +
-                                '<strong>Address:</strong>' + place.formatted_address + '<br />' +
-                                '<strong>Rating:</strong>' + (place.rating==undefined ? "--" : place.rating) + '</div>'
-                            );
-                            myMaps.NearBy.infowindow.open(myMaps.currentMap, this);
-                        });
+                        if(place.types[0]==myMaps.NearBy.types){
+                            var options = {
+                                map: myMaps.currentMap,
+                                position: place.geometry.location
+                            };
+                            /*
+                             if (place.icon == undefined || place.icon == null || place.icon == ""){
+
+                             }else{
+                             options.icon = {
+                             url: place.icon,
+                             scaledSize: new google.maps.Size(32,32)
+                             };
+                             }
+                             */
+                            var theRating="";
+                            if(place.rating!=undefined){
+                                if(place.rating<2){
+                                    theRating="1";
+                                }else if(place.rating>2&&place.rating<4){
+                                    theRating="2";
+                                }else if(place.rating>4){
+                                    theRating="3";
+                                }
+                            }
+                            var iconurl="";
+                            if(place.types[0]=="cafe"){
+                                iconurl="./Icon/cafe.png";
+                            }else if(place.types[0]=="night_club"){
+                                iconurl="./Icon/nightclub.png";
+                            }else if(place.types[0]=="restaurant"){
+                                iconurl="./Icon/restaurant.png";
+                            }else if(place.types[0]=="bar"){
+                                iconurl="./Icon/bar.png";
+                            }
+                            options.icon = {
+                                url: iconurl,
+                                scaledSize: new google.maps.Size(32,32)
+                            };
+
+
+                            var marker = new google.maps.Marker(options);
+                            google.maps.event.addListener(marker, 'click', function() {
+                                myMaps.NearBy.infowindow.setContent(
+                                    '<div><strong>' + place.name + '</strong><br>' +
+                                    '<strong>Address:</strong>' + place.formatted_address + '<br />' +
+                                    '<strong>Rating:</strong>' + (place.rating==undefined ? "--" : place.rating) +'<br/>'+
+                                    '<strong>Phone number: </strong>' +place.formatted_phone_number+'<br/>'+
+                                    '<strong>Opening: </strong>' +(place.opening_hours==undefined ? "--" :(place.opening_hours.periods[0].open.time+' - '+place.opening_hours.periods[0].close.time))+'<br/>'+
+                                    '<strong>Open persiod: </strong>'+(place.opening_hours==undefined ? "--" :(place.opening_hours.open_now==false ? "No" : "Yes"))+'<br/>'+
+
+
+                                    '</div>'
+                                );
+                                myMaps.NearBy.infowindow.open(myMaps.currentMap, this);
+                            });
+                        }
                     }
                 });
 

@@ -38,6 +38,29 @@
             border-color: #000;
             border-style: dotted;
         }
+        #smallMap{
+            position: fixed;
+            /*width: 300px;*/
+            height: 150px;
+            width: 250px;
+            /*height: 380px;*/
+            left: 8px;
+            bottom: 0px;
+        }
+        #sMap{
+            border-style: solid;
+            height: 90%;
+            overflow: hidden;
+        }
+        .gmnoprint a, .gmnoprint span {
+            display:none;
+        }
+        .gmnoprint div {
+            background:none !important;
+        }
+        #GMapsID div div a div img{
+            display:none;
+        }
     </style>
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" />
@@ -50,6 +73,29 @@
 
             });
         });
+    </script>
+    <script>
+        function initMap() {
+            // Create a map object and specify the DOM element for display.
+            var map = new google.maps.Map(document.getElementById('sMap'), {
+                center: {
+                    lat: 22.352734,
+                    lng: 114.132163
+                },
+                scaleControl: false,
+                zoomControl: false,
+                streetViewControl: false,
+                disableDoubleClickZoom: true,
+                scrollwheel: false,
+                streetViewControl: false,
+                draggable: false,
+                zoom: 9,
+
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqXeIMk10g9_-_UtqnjKwoy1gNfGC6ITc&callback=initMap"
+            async defer>
     </script>
 </head>
 <body>
@@ -68,10 +114,75 @@
             MAP TITLE HERE
         </div>
     </div>
-    <!--<textarea id="latlngList" class="form-control" rows="5" placeholder="latlng output"></textarea>-->
+    <div id="optionButton" class="row">
 
-    <!--<button class="btn btn-default btn-raised" id="hk-map-polygon-draw">Draw polygon</button>-->
-    <!--<button class="btn btn-default btn-raised" id="hk-map-polygon-remove">Remove polygon</button>-->
+    </div>
+    <div class="col-sm-12 text-center" id="symbolList">
+        Sysbmol List
+        <div class="col-sm-12 text-center" id="symbolTable">
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-4">
+                    <img src="./Icon/cafe.png" width="50" height="50"/>
+                </div>
+                <div class="col-sm-8">
+                    Cafe
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-4">
+                    <img src="./Icon/nightclub.png" width="50" height="50"/>
+                </div>
+                <div class="col-sm-8">
+                    Night CLUB
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-4">
+                    <img src="./Icon/restaurant.png" width="50" height="50"/>
+                </div>
+                <div class="col-sm-8">
+                    Restaurant
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-4">
+                    <img src="./Icon/bar.png" width="50" height="50"/>
+                </div>
+                <div class="col-sm-8">
+                    BAR
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-6" style="background-color:RGB(191,219,151);height:50;width:50;">
+                    &nbsp;
+                </div>
+                <div class="col-sm-6">
+                    Park
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-6" style="background-color:RGB(163,196,255);height:50;width:50;">
+                    &nbsp;
+                </div>
+                <div class="col-sm-6">
+                    Sea
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--<textarea id="latlngList" class="form-control" rows="5" placeholder="latlng output"></textarea>-->
+
+<!--<button class="btn btn-default btn-raised" id="hk-map-polygon-draw">Draw polygon</button>-->
+<!--<button class="btn btn-default btn-raised" id="hk-map-polygon-remove">Remove polygon</button>-->
+<div id="smallMap">
+    <div id="sMap"></div>
+</div>
+
 </div>
 </body>
 </html>
