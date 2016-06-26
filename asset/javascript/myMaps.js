@@ -218,9 +218,22 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
 
                     if(place == null) return;
 
+                    var imageIndex;
                     if(place.hasOwnProperty('rating')){
+                        console.log(place.rating);
                         place.rating = parseFloat(place.rating) / 5 * 3;
                         place.rating = Math.round(place.rating * 10) / 10;
+                        if(place.rating < 1){
+                            // [0,1)
+                            imageIndex = 1
+                        }else if(place.rating > 2){
+                            // (2,3]
+                            imageIndex = 3
+                        }else{
+                            // [1,2)
+                            imageIndex = 2
+                        }
+
                     }
 
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
@@ -228,7 +241,7 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                             map: myMaps.currentMap,
                             position: place.geometry.location,
                             icon:{
-                                url: 'asset/image/' + myMaps.NearBy.types + (place.hasOwnProperty('rating') ? parseInt(place.rating) : 0) +  '.png',
+                                url: 'asset/image/' + myMaps.NearBy.types + (place.hasOwnProperty('rating') ? imageIndex : 0) +  '.png',
                                 scaledSize: new google.maps.Size(32,32)
                             }
                         };
