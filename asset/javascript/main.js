@@ -45,7 +45,8 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox
             myMaps.NearBy.initMap();
 
             myMaps.currentMap.addListener('zoom_changed', function(){
-                console.log(myMaps.currentMap.getZoom());
+                console.log("Zoom Level: " + myMaps.currentMap.getZoom() + ", Meters per pixel: " + (156543.03392 * Math.cos(myMaps.currentMap.getCenter().lat() * Math.PI / 180) / Math.pow(2, myMaps.currentMap.getZoom())));
+
             });
         });
 
