@@ -3,7 +3,6 @@
  */
 define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox2'], function ($, googleMap, myMaps) {
     $(function(){
-        //myMaps.hk.init();
         myMaps.NearBy.initMap();
         myMaps.smallMap.init();
 
@@ -63,15 +62,6 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox
                 console.log("Zoom Level: " + myMaps.currentMap.getZoom() + ", Meters per pixel: " + (156543.03392 * Math.cos(myMaps.currentMap.getCenter().lat() * Math.PI / 180) / Math.pow(2, myMaps.currentMap.getZoom())));
 
             });
-        });
-
-
-        $("#hk-map-polygon-draw").click(function () {
-            myMaps.hk.drawPolygon();
-        });
-
-        $("#hk-map-polygon-remove").click(function () {
-            myMaps.hk.removePolygon();
         });
 
         $("#option-show").click(function() {
