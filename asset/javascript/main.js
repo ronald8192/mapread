@@ -8,10 +8,10 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox
         myMaps.smallMap.init();
 
         var nearbyType = [
-            {name:'cafe',text:'Cafe'},
-            {name:'night_club',text:'Night Club'},
-            {name:'restaurant',text:'Restaurant'},
-            {name:'bar',text:'Bar'}
+            {name:'cafe0',text:'Cafe'},
+            {name:'club0',text:'Night Club'},
+            {name:'restaurant0',text:'Restaurant'},
+            {name:'bar0',text:'Bar'}
         ];
 
         for(var n in nearbyType){

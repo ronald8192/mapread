@@ -16,7 +16,7 @@
             position: fixed;
             /*width: 300px;*/
             height: 94vh;
-            width: 250px;
+            width: 300px;
             /*height: 380px;*/
             right: 8px;
             top: 12px;
@@ -62,7 +62,7 @@
             width: 250px;
             /*height: 380px;*/
             left: 8px;
-            bottom: 0px;
+            bottom: 10px;
         }
 
         #sMap {
@@ -70,6 +70,31 @@
             height: 90%;
             overflow: hidden;
         }
+        #theScale{
+            width:100%;
+            background-color:#FFFFFF;
+        }
+        #symbolList{
+            width:100%
+        }
+        #scale-black{
+            background-color:#000000;
+        }
+        #scale-white{
+            background-color:#FFFFFF;
+        }
+        #sMap .gmnoprint span ,#sMap .gmnoprint a {
+            display:none;
+        }
+        #sMap .gmnoprint div {
+            background:none !important;
+        }
+        #sMap #GMapsID div div a div img{
+            display:none;
+        }
+
+
+
     </style>
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" />
@@ -109,10 +134,91 @@
         <div class="col-sm-3" style="padding-top: 10px"><button class="btn btn-xs btn-default btn-raised" id="text-route-hide">Clear</button></div>
         <div class="col-sm-12" id="text-route-content"></div>
     </div>
+    <div class="col-sm-12 text-center" id="symbolList">
+        <Strong>Rating</Strong>
+        <div class="col-sm-12" id="symbolTable">
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-3">
+                    <Strong>-</Strong>
+                </div>
+                <div class="col-sm-3">
+                    <Strong>0-2</Strong>
+                </div>
+                <div class="col-sm-3">
+                    <Strong>3-4</Strong>
+                </div>
+                <div class="col-sm-3">
+                    <Strong>4 up</Strong>
+                </div>
+            </div>
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-3">
+                    <img src="./asset/image/cafe0.png" height=48 width=48/>
+                </div>
+                <div class="col-sm-3">
+                    <img src="./asset/image/cafe1.png" height=48 width=48/>
+                </div>
+                <div class="col-sm-3">
+                    <img src="./asset/image/cafe2.png" height=48 width=48/>
+                </div>
+                <div class="col-sm-3">
+                    <img src="./asset/image/cafe3.png" height=48 width=48/>
+                </div>
+            </div>
 
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-3">
+                    <img src="./asset/image/club0.png" height=48 width=48/>
+                </div>
+                <div class="col-sm-3">
+                    <img src="./asset/image/club1.png" height=48 width=48/>
+                </div>
+                <div class="col-sm-3">
+                    <img src="./asset/image/club2.png" height=48 width=48/>
+                </div>
+                <div class="col-sm-3">
+                    <img src="./asset/image/club3.png" height=48 width=48/>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-3">
+                    <img src="./asset/image/restaurant0.png" height=48 width=48/>
+                </div>
+                <div class="col-sm-3">
+                    <img src="./asset/image/restaurant1.png" height=48 width=48/>
+                </div>
+                <div class="col-sm-3">
+                    <img src="./asset/image/restaurant2.png" height=48 width=48/>
+                </div>
+                <div class="col-sm-3">
+                    <img src="./asset/image/restaurant3.png" height=48 width=48/>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:10px;">
+                <div class="col-sm-3">
+                    <img src="./asset/image/bar0.png" height=48 width=48/>
+                </div>
+                <div class="col-sm-3">
+                    <img src="./asset/image/bar1.png" height=48 width=48/>
+                </div>
+                <div class="col-sm-3">
+                    <img src="./asset/image/bar2.png" height=48 width=48/>
+                </div>
+                <div class="col-sm-3">
+                    <img src="./asset/image/bar3.png" height=48 width=48/>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     <div id="smallMap">
+        <div id="theScale" class="col-sm-8 text-center">
+            <Strong>1:200000</Strong>
+        </div>
         <div id="sMap"></div>
     </div>
-</div>
 </body>
 </html>
