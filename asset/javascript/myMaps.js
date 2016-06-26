@@ -436,7 +436,6 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                     streetViewControl: false,
                     disableDoubleClickZoom: true,
                     scrollwheel: false,
-                    streetViewControl: false,
                     draggable: false,
                     zoom: 9,
 
