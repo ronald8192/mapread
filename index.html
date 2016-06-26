@@ -69,7 +69,12 @@
             width: 250px;
             /*height: 380px;*/
             left: 8px;
-            bottom: 0px;
+            bottom: 10px;
+        }
+
+        .rating-icon{
+            height: 48px;
+            width: 48px;
         }
 
         #sMap {
@@ -78,10 +83,29 @@
             overflow: hidden;
         }
 
-        .rating-icon{
-            height: 48px;
-            width: 48px;
+        #theScale{
+            width:100%;
+            background-color:#FFFFFF;
         }
+        #symbolList{
+            width:100%
+        }
+        #scale-black{
+            background-color:#000000;
+        }
+        #scale-white{
+            background-color:#FFFFFF;
+        }
+        #sMap .gmnoprint span ,#sMap .gmnoprint a {
+            display:none;
+        }
+        #sMap .gmnoprint div {
+            background:none !important;
+        }
+        #sMap #GMapsID div div a div img{
+            display:none;
+        }
+
     </style>
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" />
@@ -137,6 +161,9 @@
     </div>
 
     <div id="smallMap">
+        <div id="theScale" class="col-sm-8 text-center">
+            <Strong>1:200000</Strong>
+        </div>
         <div id="sMap"></div>
     </div>
 </div>
