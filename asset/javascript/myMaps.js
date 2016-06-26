@@ -208,7 +208,11 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                     if (status === google.maps.places.PlacesServiceStatus.OK) {
                         var options = {
                             map: myMaps.currentMap,
-                            position: place.geometry.location
+                            position: place.geometry.location,
+                            icon:{
+                                url: 'asset/image/' + myMaps.NearBy.types + '.png',
+                                scaledSize: new google.maps.Size(32,32)
+                            }
                         };
                         //if (place.icon == undefined || place.icon == null || place.icon == ""){
                         //
@@ -349,6 +353,25 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                 //        place.formatted_address + '</div>');
                 //    NearBy.infowindow.open(currentMap, this);
                 //});
+            }
+        },
+        smallMap:{
+            init: function(){
+                new google.maps.Map(document.getElementById('sMap'), {
+                    center: {
+                        lat: 22.352734,
+                        lng: 114.132163
+                    },
+                    scaleControl: false,
+                    zoomControl: false,
+                    streetViewControl: false,
+                    disableDoubleClickZoom: true,
+                    scrollwheel: false,
+                    streetViewControl: false,
+                    draggable: false,
+                    zoom: 9,
+
+                });
             }
         }
     };

@@ -5,6 +5,7 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox
     $(function(){
         //myMaps.hk.init();
         myMaps.NearBy.initMap();
+        myMaps.smallMap.init();
 
         var nearbyType = [
             {name:'cafe',text:'Cafe'},
@@ -18,7 +19,7 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox
                 $("<div />").addClass('row').append(
                     $("<div />").addClass('col-xs-2').append(
                         $("<img />").attr({
-                            'src':'asset/image/food-icon-dinner.png'
+                            'src':'asset/image/' + nearbyType[n].name + '.png'
                         }).css({
                             'height':'36px',
                             'width':'36px',
