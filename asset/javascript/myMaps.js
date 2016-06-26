@@ -181,6 +181,16 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                 myMaps.currentMap.mapTypes.set('map_style', styledMap);
                 myMaps.currentMap.setMapTypeId('map_style');
 
+                new google.maps.Marker({
+                    position: centerLatLng,
+                    map: myMaps.currentMap,
+                    title: 'The Hong Kong Polytechnic University',
+                    icon:{
+                        url: 'asset/image/PolyU_logo.png',
+                        scaledSize: new google.maps.Size(28,28)
+                    }
+                });
+
                 myMaps.NearBy.infowindow = new google.maps.InfoWindow();
 
                 myMaps.NearBy.service = new google.maps.places.PlacesService(myMaps.currentMap);
