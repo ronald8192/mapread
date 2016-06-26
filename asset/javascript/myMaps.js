@@ -261,7 +261,14 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                                     $("<div />").addClass('row info-windows-row').append(
                                         $("<div />").addClass('col-xs-3').append($("<strong />").text("Address: "))
                                     ).append(
-                                        $("<div />").addClass('col-xs-9').append($("<span />").text(place.formatted_address))
+                                        $("<div />").addClass('col-xs-9').append(
+                                            $("<span />").attr({
+                                                'onclick': "myMaps.NearBy.routeTo({lat:" + place.geometry.location.lat() + ", lng:" + place.geometry.location.lng() + "})"
+                                            }).css({
+                                                color: '#009688',
+                                                cursor: 'pointer'
+                                            }).text(place.formatted_address)
+                                        )
                                     )
                                 ).append(
                                     $("<div />").addClass('row info-windows-row').append(
@@ -363,6 +370,43 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                 //        place.formatted_address + '</div>');
                 //    NearBy.infowindow.open(currentMap, this);
                 //});
+            },
+            directionsDisplay: undefined,
+            routeTo: function(latlng){
+                directionsService = new google.maps.DirectionsService();
+                if (myMaps.NearBy.directionsDisplay){
+                    myMaps.NearBy.directionsDisplay.setMap(null);
+                }else{
+                    myMaps.NearBy.directionsDisplay = new google.maps.DirectionsRenderer();
+                }
+
+                myMaps.NearBy.directionsDisplay.setMap(myMaps.currentMap);
+
+                if(typeof latlng == 'string'){
+                    var lat = parseFloat(latlng.split(',')[0]);
+                    var lng = parseFloat(latlng.split(',')[1]);
+                    latlng = {
+                        lat: lat,
+                        lng: lng
+                    }
+                }
+                directionsService.route({
+                    origin: {lat: 22.304265, lng: 114.179726},
+                    destination: latlng,
+                    travelMode: google.maps.DirectionsTravelMode.WALKING
+                }, function (response, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        myMaps.NearBy.directionsDisplay.setDirections(response);
+                        var myRoute = response.routes[0];
+                        var stepsList = $("<ol/>");
+                        for (var i = 0; i < myRoute.legs[0].steps.length; i++) {
+                            $("<li/>").html(myRoute.legs[0].steps[i].instructions).appendTo(stepsList);
+                        }
+                        $("#text-route-content").html("").append(stepsList);
+                        $("#text-route").removeClass('hidden');
+                    }
+                });
+                myMaps.NearBy.infowindow.close();
             }
         },
         smallMap:{

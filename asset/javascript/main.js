@@ -15,7 +15,7 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox
         ];
 
         for(var n in nearbyType){
-            $("#optionPane").append(
+            $("#types-option").append(
                 $("<div />").addClass('row').append(
                     $("<div />").addClass('col-xs-2').append(
                         $("<img />").attr({
@@ -79,6 +79,10 @@ define(['jquery', 'googleMap', 'myMaps','bootstrapMaterial','jqueryui','lightbox
             myMaps.currentMap.setZoom(16)
         });
 
+        $("#text-route-hide").click(function(){
+            $("#text-route").addClass("hidden");
+            myMaps.NearBy.directionsDisplay.setMap(null);
+        });
 
         $.material.init();
     });
