@@ -186,7 +186,6 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                                         }).text(function(){
                                                 if(place.hasOwnProperty('opening_hours')){
                                                     return ' - ' + ((place.opening_hours.open_now)? "Now Open" : "Now Close")
-
                                                 }else{
                                                     return '';
                                                 }
@@ -194,7 +193,6 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                                         )
                                     )
                                 ).append(
-
                                     $("<div />").addClass('row info-windows-row').append(
                                         $("<div />").addClass('col-xs-3').append($("<strong />").text("Address: "))
                                     ).append(
