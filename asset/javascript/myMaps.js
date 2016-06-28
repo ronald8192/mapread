@@ -359,7 +359,67 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
         },
         smallMap:{
             init: function(){
-                new google.maps.Map(document.getElementById('sMap'), {
+
+                var styles = [
+                        {
+                            "featureType": "landscape.man_made",
+                            "stylers": [
+                                { "color": "#e2e2e2" }
+                            ]
+                        },{
+                            "featureType": "road.arterial",
+                            "elementType": "geometry",
+                            "stylers": [
+                                { "color": "#656565" }
+                            ]
+                        },{
+                            "featureType": "road.local",
+                            "elementType": "geometry",
+                            "stylers": [
+                                { "color": "#b9b9b9" }
+                            ]
+                        },{
+                            "elementType": "labels.icon",
+                            "stylers": [
+                                { "visibility": "off" }
+                            ]
+                        },{
+                            "featureType": "water",
+                            "stylers": [
+                                { "color": "#b9b9b9" }
+                            ]
+                        },{
+                            "featureType": "transit",
+                            "stylers": [
+                                { "visibility": "simplified" }
+                            ]
+                        },{
+                            "featureType": "poi",
+                            "elementType": "geometry.fill",
+                            "stylers": [
+                                { "visibility": "on" },
+                                { "color": "#c9c9c9" }
+                            ]
+                        },{
+                            "elementType": "geometry.stroke",
+                            "stylers": [
+                                { "color": "#b9b9b9" }
+                            ]
+                        },{
+                            "featureType": "road.highway",
+                            "stylers": [
+                                { "color": "#808080" }
+                            ]
+                        },{
+                            "stylers": [
+                                { "saturation": -100 }
+                            ]
+                        }
+                    ];
+
+                var styledMap = new google.maps.StyledMapType(styles, {name: "Disable Symbols"});
+
+                var smallMap = new google.maps.Map(document.getElementById('sMap'), {
                     center: {
                         lat: 22.352734,
                         lng: 114.132163
@@ -371,8 +431,10 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                     scrollwheel: false,
                     draggable: false,
                     zoom: 9,
-
                 });
+
+                smallMap.mapTypes.set('map_style', styledMap);
+                smallMap.setMapTypeId('map_style');
             }
         }
     };
