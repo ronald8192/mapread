@@ -113,6 +113,14 @@
         #text-route-content ol{
             padding-left: 20px;
         }
+        #compass-rose{
+            z-index: 99999;
+            position: fixed;
+            top: 50px;
+            left: 10px;
+            width: 7.5%;
+        }
+
     </style>
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap/dist/css/bootstrap.min.css" />
     <link type="text/css" rel="stylesheet" href="asset/javascript/vendor/bootstrap-material-design/dist/css/bootstrap-material-design.min.css" />
@@ -131,6 +139,7 @@
 </head>
 <body>
 <div id="map"></div>
+<img id="compass-rose" src="asset/image/compass.png" />
 <div id="optionPane" class="well">
     <div class="row">
         <div class="col-sm-6">
