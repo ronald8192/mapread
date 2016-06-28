@@ -154,7 +154,7 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
                             position: place.geometry.location,
                             icon:{
                                 url: 'asset/image/' + myMaps.NearBy.types + (place.hasOwnProperty('rating') ? imageIndex : 0) +  '.png',
-                                scaledSize: new google.maps.Size(32,32)
+                                scaledSize: new google.maps.Size(38,38)
                             }
                         };
                         //if (place.icon == undefined || place.icon == null || place.icon == ""){
