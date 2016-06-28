@@ -361,61 +361,12 @@ define(['jquery', 'googleMap','lightbox2'], function ($, googleMap) {
             init: function(){
 
                 var styles = [
-                        {
-                            "featureType": "landscape.man_made",
-                            "stylers": [
-                                { "color": "#e2e2e2" }
-                            ]
-                        },{
-                            "featureType": "road.arterial",
-                            "elementType": "geometry",
-                            "stylers": [
-                                { "color": "#656565" }
-                            ]
-                        },{
-                            "featureType": "road.local",
-                            "elementType": "geometry",
-                            "stylers": [
-                                { "color": "#b9b9b9" }
-                            ]
-                        },{
-                            "elementType": "labels.icon",
-                            "stylers": [
-                                { "visibility": "off" }
-                            ]
-                        },{
-                            "featureType": "water",
-                            "stylers": [
-                                { "color": "#b9b9b9" }
-                            ]
-                        },{
-                            "featureType": "transit",
-                            "stylers": [
-                                { "visibility": "simplified" }
-                            ]
-                        },{
-                            "featureType": "poi",
-                            "elementType": "geometry.fill",
-                            "stylers": [
-                                { "visibility": "on" },
-                                { "color": "#c9c9c9" }
-                            ]
-                        },{
-                            "elementType": "geometry.stroke",
-                            "stylers": [
-                                { "color": "#b9b9b9" }
-                            ]
-                        },{
-                            "featureType": "road.highway",
-                            "stylers": [
-                                { "color": "#808080" }
-                            ]
-                        },{
-                            "stylers": [
-                                { "saturation": -100 }
-                            ]
-                        }
-                    ];
+                    {
+                        "stylers": [
+                            { "saturation": -60 }
+                        ]
+                    }
+                ];
 
                 var styledMap = new google.maps.StyledMapType(styles, {name: "Disable Symbols"});
 
